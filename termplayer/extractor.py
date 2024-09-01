@@ -6,4 +6,4 @@ def extract_frames(path, width, height):
     for i, frame in enumerate(reader):
         image = Image.fromarray(frame)
         image = image.resize((width, height))
-        image.save(f"../resources/frame_{i}.bmp", format="BMP")
+        image.save(f"../resources/frames/frame_{i}.bmp", format="BMP")

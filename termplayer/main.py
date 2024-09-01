@@ -1,6 +1,7 @@
 import argparse
 from player import Player
 from utils import setup_logging
+import curses
 import sys
 
 def parse_arguments():
@@ -13,7 +14,8 @@ def parse_arguments():
     parser.add_argument("--log-level", type=str, default="INFO", help="Set the logging level (DEBUG, INFO, WARNING, ERROR)")
     return parser.parse_args()
 
-def main():
+def main(stdscr):
+    curses.curs_set(0)
     args = parse_arguments()
     setup_logging(args.log_level)
 
@@ -22,6 +24,7 @@ def main():
         sys.exit(1)
 
     player = Player(
+        stdscr=stdscr,
         path=args.path,
         width=args.width,
         height=args.height,
@@ -32,4 +35,4 @@ def main():
     player.play()
 
 if __name__ == "__main__":
-    main()
+    curses.wrapper(main)

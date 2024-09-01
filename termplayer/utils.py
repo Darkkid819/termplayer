@@ -10,3 +10,4 @@ def cleanup_resources():
     if os.path.exists(resources):
         shutil.rmtree(resources)
     os.mkdir(resources)
+    os.mkdir(resources + "/frames")
