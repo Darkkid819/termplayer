@@ -1,6 +1,7 @@
 import argparse
 from player import Player
 from utils import setup_logging
+import sys
 
 def parse_arguments():
     parser = argparse.ArgumentParser("TermPlayer: Play videos as ASCII art in the terminal")
@@ -15,6 +16,10 @@ def parse_arguments():
 def main():
     args = parse_arguments()
     setup_logging(args.log_level)
+
+    if not args.path or not args.path.strip():
+        print("Error: you must provide a valid video file path.")
+        sys.exit(1)
 
     player = Player(
         path=args.path,
