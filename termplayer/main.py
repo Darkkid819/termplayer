@@ -1,6 +1,6 @@
 import argparse
 from player import Player
-from utils import setup_logging
+from utils import get_video_fps, setup_logging
 import curses
 import sys
 
@@ -31,6 +31,7 @@ def main(stdscr):
         fps=args.fps,
         audio=not args.no_audio
     )
+    player.fps=get_video_fps(player.path)
 
     player.play()
 
