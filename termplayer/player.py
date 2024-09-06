@@ -16,11 +16,18 @@ class Player:
         self.fps = fps
         self.audio = audio
 
+        # Display the progress of each step in the terminal
+        self.display_message("Cleaning up resources...")
         cleanup_resources()
 
+        self.display_message("Extracting frames...")
         extract_frames(self.path, self.width, self.height)
 
-        extract_audio(self.path, "../resources/audio.mp3")
+        if self.audio:
+            self.display_message("Extracting audio...")
+            extract_audio(self.path, "../resources/audio.mp3")
+
+        self.display_message("Setup complete. Playing video...")
 
     def play(self):
         frame_dir = "../resources/frames"
@@ -44,3 +51,8 @@ class Player:
         if self.audio:
             pygame.mixer.music.stop()
 
+    def display_message(self, message):
+        self.stdscr.clear()
+        self.stdscr.addstr(0, 0, message)
+        self.stdscr.refresh()
+        curses.napms(1000)  
