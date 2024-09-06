@@ -31,9 +31,6 @@ class Player:
             pygame.mixer.init()
             pygame.mixer.music.load("../resources/audio.mp3")
             pygame.mixer.music.play()
-            
-            while pygame.mixer.music.get_busy():
-                pygame.time.Clock().tick(10)
 
         for frame_file in frame_files:
             frame_path = os.path.join(frame_dir, frame_file)
@@ -41,5 +38,9 @@ class Player:
             render_frame(self.stdscr, ascii_frame)
             curses.napms(frame_delay)
 
+            if self.audio and not pygame.mixer.music.get_busy():
+                break
+
         if self.audio:
             pygame.mixer.music.stop()
+

@@ -21,6 +21,6 @@ def extract_audio(path, output):
         "-acodec", "mp3",
         output
     ]
-    
+
     with open(os.devnull, 'w') as devnull:
         subprocess.run(command, check=True, stdout=devnull, stderr=devnull)
